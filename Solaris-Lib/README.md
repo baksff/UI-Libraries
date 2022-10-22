@@ -131,3 +131,6 @@ Label set
 ```lua
 label:Set(text <string>)
 ```
+
+### Credits
+Solaris Software (idk, if it is right)
