@@ -14,6 +14,8 @@ Themes (only 2 theme)
 local SolarisLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/baksff/UI-Libraries/master/Solaris-Lib/solaris.lua"))()
 ```
 
+
+
 > Creating the Window
 ```lua
 local Window = SolarisLib:New({
