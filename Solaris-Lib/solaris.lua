@@ -1,3 +1,4 @@
+-- This User Interface Library is brought to you by Solaris Software.
 local Solaris = Instance.new("ScreenGui")
 Solaris.Name = "SolarisLib"
 Solaris.Parent = game.CoreGui
@@ -25,6 +26,8 @@ local function CheckKey(tab, key)
 		end
 	end
 end
+
+
 
 local NotificationFrame = game:GetObjects("rbxassetid://6924028278")[1]
 NotificationFrame.ZIndex = 4
@@ -299,7 +302,7 @@ function SolarisLib:New(Config)
                     Bind.BText.Text = value
                     SolarisLib.Settings[path] = value
                     SaveSettings()
-                end
+                end    
                 SetValue(value)
 
                 Bind.InputEnded:Connect(function(Input)
@@ -405,7 +408,7 @@ function SolarisLib:New(Config)
         local appearance = Settings:Tab("Appearance")
         appearance:Dropdown("Theme", "The look of the user interface", {"Default", "Discord"}, "Default", "Theme")
 
-    end
+    end 
     SettingsConstructor()
 
     local function OpenTabMenu()
