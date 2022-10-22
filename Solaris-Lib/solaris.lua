@@ -692,7 +692,7 @@ function SolarisLib:New(Config)
                 return Slider
             end    
             function ItemHold:Dropdown(text,list,def,flag,callback)
-                local Dropdown,DropMain,OptionPreset = {Value = nil, Toggled = false, Options = list}, game:GetObjects("rbxassetid://7027964359")[1], game:GetObjects("rbxassetid://7021432326")[1]
+                local Dropdown,DropMain,OptionPreset = {Value = {}, Toggled = false, Options = list}, game:GetObjects("rbxassetid://7027964359")[1], game:GetObjects("rbxassetid://7021432326")[1]
                 DropMain.Parent = Section
                 DropMain.Btn.Title.Text = text
                 DropMain.Name = text .. "element"
