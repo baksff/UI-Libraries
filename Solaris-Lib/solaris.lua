@@ -180,12 +180,65 @@ function SolarisLib:New(Config)
     local oldScript = script
 
     local MenuBtnPreset = game:GetObjects("rbxassetid://7037141226")[1]
+    local CreditsBtn = MenuBtnPreset:Clone()
+    CreditsBtn.Parent = MFrame.TopBar.ButtonHolder.MenuBtn.MenuFrame
+    CreditsBtn.Position = UDim2.new(0,0,0,5)
+    CreditsBtn.Text = "Credits"
+    CreditsBtn.MouseEnter:Connect(function() TweenService:Create(CreditsBtn,TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play() end)
+    CreditsBtn.MouseLeave:Connect(function() TweenService:Create(CreditsBtn,TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play() end)
     local SettingsBtn = MenuBtnPreset:Clone()
     SettingsBtn.Parent = MFrame.TopBar.ButtonHolder.MenuBtn.MenuFrame
     SettingsBtn.Position = UDim2.new(0,0,0,25)
     SettingsBtn.Text = "Settings"
     SettingsBtn.MouseEnter:Connect(function() TweenService:Create(SettingsBtn,TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play() end)
     SettingsBtn.MouseLeave:Connect(function() TweenService:Create(SettingsBtn,TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play() end)
+
+    function CreditsConstructor()
+        local abuttonhold = false
+        local playing = false
+        local MarketplaceService = game:GetService("MarketplaceService")
+        local CreditsFrame, CreditsPreset = game:GetObjects("rbxassetid://7296373622")[1], game:GetObjects("rbxassetid://7296615234")[1]
+        CreditsFrame.Parent = Solaris
+        CreditsFrame.ZIndex = 5
+        CreditsFrame.Visible = SolarisLib.Settings.ShowCreditsOnLaunch
+        CreditsFrame.Frame.Title.Text = "Credits"
+        CreditsFrame.Frame.Progress.ProgressFrame.Size = UDim2.new(0,0,1,0)
+        CreditsFrame.Frame.AddBtn.AutoButtonColor = false
+
+        MakeDraggable(CreditsFrame.Frame.TopBar,CreditsFrame)
+        CreditsFrame.Frame.TopBar.CloseBtn.MouseButton1Click:Connect(function()
+            CreditsFrame.Visible = false
+        end)
+        CreditsFrame.Frame.TopBar.CloseBtn.MouseEnter:Connect(function() TweenService:Create(CreditsFrame.Frame.TopBar.CloseBtn.Ico,TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageTransparency = 0}):Play() end)
+        CreditsFrame.Frame.TopBar.CloseBtn.MouseLeave:Connect(function() TweenService:Create(CreditsFrame.Frame.TopBar.CloseBtn.Ico,TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{ImageTransparency = 0.4}):Play() end)
+        CreditsBtn.MouseButton1Click:Connect(function()
+            CreditsFrame.Visible = not CreditsFrame.Visible
+            MFrame.TopBar.ButtonHolder.MenuBtn.MenuFrame.Visible = false 
+        end) 
+
+
+        CreditsFrame.Frame.AddBtn.MouseEnter:Connect(function()
+            abuttonhold = true
+        end)
+
+        CreditsFrame.Frame.AddBtn.MouseLeave:Connect(function()
+            abuttonhold = false
+        end)
+        
+        spawn(function()
+            while wait() do
+                CreditsFrame.Frame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].MainFrame
+                CreditsFrame.Frame.TopBar.ImageColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].TopBar
+                CreditsFrame.Frame.TopBar.CloseBtn.Ico.ImageColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].TextColor
+                CreditsFrame.Frame.Credits.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].TopBar
+                CreditsFrame.Frame.AddBtn.BackgroundColor3 = abuttonhold and SolarisLib.Themes[SolarisLib.Settings.Theme].ButtonHold or SolarisLib.Themes[SolarisLib.Settings.Theme].Button
+                CreditsFrame.Frame.Progress.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Slider
+                CreditsFrame.Frame.Progress.ProgressFrame.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].SliderInc
+                CreditsFrame.Frame.AddSong.BackgroundColor3 = SolarisLib.Themes[SolarisLib.Settings.Theme].Textbox
+            end
+        end)
+    end  
+
 
     function SettingsConstructor()
         local Settings, SettingsFrame, TabPreset, ContainerPreset, TogglePreset, BindPreset, DropdownPreset, OptionPreset = {}, game:GetObjects("rbxassetid://7167491516")[1], game:GetObjects("rbxassetid://7177524915")[1], game:GetObjects("rbxassetid://7203599409")[1], game:GetObjects("rbxassetid://7208643984")[1], game:GetObjects("rbxassetid://7219277948")[1], game:GetObjects("rbxassetid://7435055269")[1], game:GetObjects("rbxassetid://7435032496")[1]
@@ -299,7 +352,7 @@ function SolarisLib:New(Config)
                     Bind.BText.Text = value
                     SolarisLib.Settings[path] = value
                     SaveSettings()
-                end    
+                end
                 SetValue(value)
 
                 Bind.InputEnded:Connect(function(Input)
@@ -405,7 +458,8 @@ function SolarisLib:New(Config)
         local appearance = Settings:Tab("Appearance")
         appearance:Dropdown("Theme", "The look of the user interface", {"Default", "Discord"}, "Default", "Theme")
 
-    end 
+    end
+    CreditsConstructor()
     SettingsConstructor()
 
     local function OpenTabMenu()
