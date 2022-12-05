@@ -1,3 +1,7 @@
+if game.CoreGui:FindFirstChild("VapeUI") then
+    game.CoreGui:FindFirstChild("VapeUI"):Destroy()
+end
+
 local lib = {RainbowColorValue = 0, HueSelectionPosition = 0}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -11,10 +15,6 @@ local ui = Instance.new("ScreenGui")
 ui.Name = "VapeUI"
 ui.Parent = game.CoreGui
 ui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-if game.CoreGui:FindFirstChild("VapeUI") then
-    game.CoreGui:FindFirstChild("VapeUI"):Destroy()
-end
 
 coroutine.wrap(
     function()
