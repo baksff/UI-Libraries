@@ -1,3 +1,7 @@
+if game.CoreGui:FindFirstChild("VapeUI") then
+    game.CoreGui:FindFirstChild("VapeUI"):Destroy()
+end
+
 local lib = {RainbowColorValue = 0, HueSelectionPosition = 0}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -8,7 +12,7 @@ local PresetColor = Color3.fromRGB(44, 120, 224)
 local CloseBind = Enum.KeyCode.RightControl
 
 local ui = Instance.new("ScreenGui")
-ui.Name = "VapeUI-Library"
+ui.Name = "VapeUI"
 ui.Parent = game.CoreGui
 ui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -145,12 +149,12 @@ function lib:Window(text, preset, closebind)
         function(io, p)
             if io.KeyCode == CloseBind then
                 if uitoggled == false then
-                    Main:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
+                    Main:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, 0.6, true)
                     uitoggled = true
                     wait(.5)
                     ui.Enabled = true
                 else
-                    Main:TweenSize(UDim2.new(0, 560, 0, 319), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
+                    Main:TweenSize(UDim2.new(0, 560, 0, 319), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, 0.6, true)
                     ui.Enabled = true
                     uitoggled = false
                 end
