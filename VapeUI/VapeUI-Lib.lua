@@ -130,7 +130,7 @@ function lib:Window(text, preset, closebind)
     Title.Size = UDim2.new(0, 200, 0, 23)
     Title.Font = Enum.Font.GothamSemibold
     Title.Text = text
-    Title.TextColor3 = Color3.fromRGB(68, 68, 68)
+    Title.TextColor3 = Color3.fromRGB(140, 140, 140)
     Title.TextSize = 16.000
     Title.TextXAlignment = Enum.TextXAlignment.Left
 
