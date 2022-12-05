@@ -8,9 +8,13 @@ local PresetColor = Color3.fromRGB(44, 120, 224)
 local CloseBind = Enum.KeyCode.RightControl
 
 local ui = Instance.new("ScreenGui")
-ui.Name = "VapeUI-Library"
+ui.Name = "VapeUI"
 ui.Parent = game.CoreGui
 ui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+if game.CoreGui:FindFirstChild("VapeUI") then
+    game.CoreGui:FindFirstChild("VapeUI"):Destroy()
+end
 
 coroutine.wrap(
     function()
@@ -125,7 +129,7 @@ function lib:Window(text, preset, closebind)
     Title.Position = UDim2.new(0.0339285731, 0, 0.0564263314, 0)
     Title.Size = UDim2.new(0, 200, 0, 23)
     Title.Font = Enum.Font.GothamSemibold
-    Title.Text = text or "Developer Version"
+    Title.Text = text
     Title.TextColor3 = Color3.fromRGB(68, 68, 68)
     Title.TextSize = 16.000
     Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -148,7 +152,6 @@ function lib:Window(text, preset, closebind)
                     Main:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
                     uitoggled = true
                     wait(.5)
-                    --knixhub.Enabled = false
                 else
                     Main:TweenSize(
                         UDim2.new(0, 560, 0, 319),
@@ -157,7 +160,6 @@ function lib:Window(text, preset, closebind)
                         .6,
                         true
                     )
-                    --knixhub.Enabled = true
                     uitoggled = false
                 end
             end
